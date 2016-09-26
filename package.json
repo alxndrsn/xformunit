@@ -1,0 +1,22 @@
+{
+  "name": "xformunit",
+  "version": "0.1.0",
+  "description": "unit tests for xforms",
+  "main": "src/xformunit.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alxndrsn/xformunit.git"
+  },
+  "author": "Alex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alxndrsn/xformunit/issues"
+  },
+  "homepage": "https://github.com/alxndrsn/xformunit#readme"
+}
