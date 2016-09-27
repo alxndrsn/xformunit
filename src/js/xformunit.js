@@ -1,13 +1,3 @@
-/*function loadForm(formPath) {
-  browser.ignoreSynchronization = true;
-  browser.get('http://localhost:8888/index.html?form=' + formPath);
-  expect(element(by.id('xformunit-loading')).getText()).toEqual('loaded');
-}
-
-module.exports = {
-  loadForm: loadForm,
-};*/
-
 var TIMEOUT = 5000;
 
 function waitFor(fn) {
@@ -33,20 +23,6 @@ function waitFor(fn) {
   };
 
   return check(0);
-
-/*
-  return new Promise(function(resolve, reject) {
-    var check = function() {
-      if(fn()) return resolve();
-      else if(startTime + TIMEOUT >= Date.now()) {
-        setTimeout(check, 500);
-      } else {
-        return reject(new Error('waitFor timed out after ' + TIMEOUT + 'ms'));
-      }
-    }
-
-    check();
-  });*/
 }
 
 function loadForm(formPath) {
@@ -57,18 +33,14 @@ function loadForm(formPath) {
 
   browser.ignoreSynchronization = true;
   browser.get('http://localhost:8888/index.html?form=' + formPath);
-//  console.log('Xformunit loading:', element(by.id('xformunit-loading')).getText());
 
-  var wf = waitFor(function() {
+  return waitFor(function() {
     return element(by.id('xformunit-loading'))
       .getText()
       .then(function(text) {
-        console.log('Fetched element text as ' + text);
         return text === 'loaded';
       });
   });
-  console.warn('loadForm()', 'wf', wf);
-  return wf;
 }
 
 module.exports = {
