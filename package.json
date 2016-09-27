@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo 'TODO this test script should be entirely gruntified!'; mkdir build; cp -r src/www build/; grunt --debug --verbose test",
+    "test": "echo 'TODO this test script should be entirely gruntified!'; mkdir build; cp -r src/www build/; cp -r test/res build/www/; grunt --debug --verbose test",
     "server": "grunt connect:test:keepalive"
   },
   "repository": {
