@@ -15,8 +15,9 @@ function waitFor(fn) {
           })
           .catch(function(err) {
             console.log('Caught error', JSON.stringify(err));
-            if(err.name !== 'NoSuchElementError') return reject(err);
-            return resolve(check(500));
+            if(['NoSuchElementError',  'StaleElementReferenceError'].indexOf(err.name) !== -1)
+              return resolve(check(500));
+            else return reject(err);
           });
       }, timeout);
     });
