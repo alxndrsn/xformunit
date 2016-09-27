@@ -4,7 +4,7 @@ describe('xformunit test framework', function() {
   it('should throw an error when the requested form is not found', function() {
     return xformunit.loadForm('../res/missing.xml')
       .then(function() {
-        throw new Error('Loading a non-existent form should fail.');
+        fail('Loading a non-existent form should fail.');
       })
       .catch(function(err) {
         // expected
@@ -17,7 +17,7 @@ describe('xformunit test framework', function() {
   it('should throw an error when the requested form is poorly-formed', function() {
     return xformunit.loadForm('../res/badly-formed.xml')
       .then(function() {
-        throw new Error('Loading a file containing badly-formed XML should fail.');
+        fail('Loading a file containing badly-formed XML should fail.');
       })
       .catch(function(err) {
         // expected
