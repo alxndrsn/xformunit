@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo 'TODO this test script should be entirely gruntified!'; mkdir build; cp -r src/www build/; grunt --debug --verbose connect protractor"
+    "test": "echo 'TODO this test script should be entirely gruntified!'; mkdir build; cp -r src/www build/; grunt --debug --verbose test",
+    "server": "grunt connect:test:keepalive"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/alxndrsn/xformunit#readme",
   "devDependencies": {
+    "enketo-core": "^4.9.2",
     "grunt": "^1.0.1",
     "grunt-contrib-connect": "^1.0.2",
     "grunt-protractor-runner": "^3.2.0"
