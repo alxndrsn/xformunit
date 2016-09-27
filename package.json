@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "echo 'TODO this test script should be entirely gruntified!'; mkdir build; cp -r src/www build/; grunt --debug --verbose connect protractor"
   },
   "repository": {
     "type": "git",
