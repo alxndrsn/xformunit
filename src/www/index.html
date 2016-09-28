@@ -1,16 +1,10 @@
 <html>
 	<head>
 		<!-- TODO include browserify bundle of enketo, jquery etc -->
-		<script src="./index.js"></script>
 	</head>
 	<body>
 		<div id="xformunit-loading"></div>
-		<script>
-			$(function() {
-				// on page load
-				// TODO load the form
-				$('#xformunit-loading').text('loaded');
-			});
-		</script>
+		<div id="form-container"></div>
+		<script src="./index.js"></script>
 	</body>
 </html>

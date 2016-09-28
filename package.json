@@ -21,10 +21,15 @@
   },
   "homepage": "https://github.com/alxndrsn/xformunit#readme",
   "devDependencies": {
+    "enketo-client-side-transformer": "git://github.com/alxndrsn/enketo-client-side-transformer.git#cd1788f38fa5d9ea846d9de1168322ec25002040",
     "enketo-core": "^4.9.2",
     "grunt": "^1.0.1",
     "grunt-contrib-connect": "^1.0.2",
     "grunt-exec": "^1.0.1",
     "grunt-protractor-runner": "^3.2.0"
+  },
+  "dependencies": {
+    "request": "^2.75.0",
+    "require": "^2.4.20"
   }
 }
