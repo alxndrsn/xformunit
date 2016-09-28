@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo 'TODO this test script should be entirely gruntified!'; mkdir build; cp -r src/www build/; cp -r test/res build/www/; grunt --debug --verbose test",
-    "server": "grunt connect:test:keepalive"
+    "test": "grunt --debug --verbose test",
+    "server": "grunt exec:www_files browserify connect:test:keepalive"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "enketo-core": "^4.9.2",
     "grunt": "^1.0.1",
     "grunt-contrib-connect": "^1.0.2",
+    "grunt-exec": "^1.0.1",
     "grunt-protractor-runner": "^3.2.0"
   }
 }

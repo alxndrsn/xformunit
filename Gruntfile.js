@@ -21,6 +21,15 @@ module.exports = function(grunt) {
       },
     },
 
+    exec: {
+      www_files: {
+        cmd: '(! [ -d build ] || rm -rf build) && ' +
+            'mkdir -p build && ' +
+            'cp -r src/www build/ && ' +
+            'cp -r test/res build/www/',
+      },
+    },
+
     protractor: {
       xforms: {
         options: {
@@ -31,12 +40,15 @@ module.exports = function(grunt) {
 
   });
 
+
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-protractor-runner');
 
 
   grunt.registerTask('test', [
+    'exec:www_files',
     'browserify',
     'connect',
     'protractor',
