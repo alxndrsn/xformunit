@@ -12,7 +12,7 @@ var formSelector = '#form-container';
 
 var location = url.parse(window.location.href);
 var formPath = location.query && location.query.split('&').find(function(param) { return param.indexOf('form=') === 0; });
-formPath = formPath && formPath.split('=', 2)[1];
+formPath = formPath && url.resolve(window.location.href, formPath.split('=', 2)[1]);
 
 function setStatus(status) {
   console.log('Updating status to: ' + status);
