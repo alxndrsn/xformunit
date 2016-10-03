@@ -1,4 +1,5 @@
-var xformunit = require('../../src/js/xformunit');
+var xformunit = require('../../src/js/xformunit'),
+    $ = xformunit.$;
 
 function TODO() {
   fail('Not yet implemented.');
@@ -59,7 +60,7 @@ describe('xformunit test framework', function() {
   });
 
   it('should update calculations relevant to a changed field', function() {
-    return xformunit.loadForm('../res/reverser.xml')
+    return xformunit.loadForm('../res/doubler.xml')
       .then(function() {
 
         return xformunit.get('/data/original');
@@ -67,7 +68,7 @@ describe('xformunit test framework', function() {
       .then(function(text) {
         expect(text).toBe('');
 
-        return xformunit.get('/data/reversed');
+        return xformunit.get('/data/doubled');
       })
       .then(function(text) {
         expect(text).toBe('');
@@ -76,10 +77,15 @@ describe('xformunit test framework', function() {
       })
       .then(function() {
 
-        return xformunit.get('/data/reversed');
+        return xformunit.update();
+
+      })
+      .then(function() {
+
+        return xformunit.get('/data/doubled');
       })
       .then(function(text) {
-        expect(text).toBe('321cba');
+        expect(text).toBe('abc123abc123');
 
       })
       .catch(xformunit.unexpected);

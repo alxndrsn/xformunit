@@ -53,8 +53,12 @@ function beforeEach() {
   return browser.get('about:blank');
 }
 
+function $(selecter) {
+  return element(by.css(selecter));
+}
+
 function $input(name) {
-  return element(by.css('[name="' + name + '"]'));
+  return $('[name="' + name + '"]');
 }
 
 function get(fieldName) {
@@ -71,10 +75,16 @@ function unexpected(err) {
   fail('No error expected, but got: ' + err);
 }
 
+function update() {
+  // to make sure that the form's updated, we need to blur any active field
+  return $('body').click();
+}
+
 module.exports = {
   beforeEach: beforeEach,
   get: get,
   loadForm: loadForm,
   set: set,
   unexpected: unexpected,
+  update: update,
 };
