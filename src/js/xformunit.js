@@ -27,23 +27,33 @@ function waitFor(fn) {
 }
 
 function loadForm(formPath) {
-  // enable forwarding of browser logs to stdout
-  browser.manage().logs().get('browser').then(function(browserLog) {
-    console.log('log: ' + require('util').inspect(browserLog));
-  });
-
-  browser.ignoreSynchronization = true;
   browser.get('http://localhost:8888/index.html?form=' + formPath);
 
   return waitFor(function() {
     return element(by.id('xformunit-loading'))
       .getText()
       .then(function(text) {
-        return text === 'loaded';
+        if(text === 'loaded') return true;
+        if(text.indexOf('error: ') === 0) throw new Error(text);
+        return false;
       });
   });
 }
 
+function beforeEach() {
+  // enable forwarding of browser logs to stdout
+  browser.manage().logs().get('browser').then(function(browserLog) {
+    console.log('log: ' + require('util').inspect(browserLog));
+  });
+
+  // don't expect angular
+  browser.ignoreSynchronization = true;
+
+  // make sure there's nothing left from the previous page
+  return browser.get('about:blank');
+}
+
 module.exports = {
+  beforeEach: beforeEach,
   loadForm: loadForm,
 };

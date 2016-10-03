@@ -1,6 +1,9 @@
 var xformunit = require('../../src/js/xformunit');
 
 describe('xformunit test framework', function() {
+
+  beforeEach(xformunit.beforeEach);
+
   it('should throw an error when the requested form is not found', function() {
     return xformunit.loadForm('../res/missing.xml')
       .then(function() {
@@ -8,10 +11,7 @@ describe('xformunit test framework', function() {
       })
       .catch(function(err) {
         // expected
-        // TODO we actually expect an error here, but until we can specify more
-        // details that we expect, it's more useful to throw it and fail the
-        // test.
-        throw err;
+        expect(err.toString()).toBe('Error: error: Error: Invalid XML: Cannot GET /res/missing.xml');
       });
   });
   it('should throw an error when the requested form is poorly-formed', function() {
@@ -28,6 +28,9 @@ describe('xformunit test framework', function() {
       });
   });
   it('should return happily when a form loads successfully', function() {
-    return xformunit.loadForm('../res/simple.xml');
+    return xformunit.loadForm('../res/simple.xml')
+      .catch(function(err) {
+        fail('No error expected, but got: ' + err);
+      });
   });
 });
