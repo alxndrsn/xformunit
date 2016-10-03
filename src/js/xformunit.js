@@ -53,7 +53,28 @@ function beforeEach() {
   return browser.get('about:blank');
 }
 
+function $input(name) {
+  return element(by.css('[name="' + name + '"]'));
+}
+
+function get(fieldName) {
+  return $input(fieldName).getAttribute('value');
+}
+
+function set(fieldName, newValue) {
+  return $input(fieldName)
+    .clear()
+    .sendKeys(newValue);
+}
+
+function unexpected(err) {
+  fail('No error expected, but got: ' + err);
+}
+
 module.exports = {
   beforeEach: beforeEach,
+  get: get,
   loadForm: loadForm,
+  set: set,
+  unexpected: unexpected,
 };

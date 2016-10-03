@@ -33,13 +33,29 @@ describe('xformunit test framework', function() {
 
   it('should return happily when a form loads successfully', function() {
     return xformunit.loadForm('../res/simple.xml')
-      .catch(function(err) {
-        fail('No error expected, but got: ' + err);
-      });
+      .catch(xformunit.unexpected);
   });
 
   it('should allow filling of textfields in a form', function() {
-    TODO();
+    return xformunit.loadForm('../res/simple.xml')
+      .then(function() {
+
+        return xformunit.get('/data/datum');
+      })
+      .then(function(text) {
+        expect(text).toBe('');
+
+        return xformunit.set('/data/datum', 'some-value');
+      })
+      .then(function() {
+
+        return xformunit.get('/data/datum');
+      })
+      .then(function(text) {
+        expect(text).toBe('some-value');
+
+      })
+      .catch(xformunit.unexpected);
   });
 
   it('should update calculations relevant to a changed field', function() {
