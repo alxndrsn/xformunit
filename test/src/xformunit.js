@@ -1,5 +1,9 @@
 var xformunit = require('../../src/js/xformunit');
 
+function TODO() {
+  fail('Not yet implemented.');
+}
+
 describe('xformunit test framework', function() {
 
   beforeEach(xformunit.beforeEach);
@@ -10,6 +14,7 @@ describe('xformunit test framework', function() {
         fail('Loading a non-existent form should fail.');
       })
       .catch(function(err) {
+        console.log('Test caught err:', err);
         // expected
         expect(err.toString()).toBe('Error: error: Error: Invalid XML: Cannot GET /res/missing.xml');
       });
@@ -22,9 +27,6 @@ describe('xformunit test framework', function() {
       })
       .catch(function(err) {
         // expected
-        // TODO we actually expect an error here, but until we can specify more
-        // details that we expect, it's more useful to throw it and fail the
-        // test.
         expect(err.toString()).toBe('Error: error: Error: Invalid XML: This is deliberately not XML.');
       });
   });
@@ -34,5 +36,13 @@ describe('xformunit test framework', function() {
       .catch(function(err) {
         fail('No error expected, but got: ' + err);
       });
+  });
+
+  it('should allow filling of textfields in a form', function() {
+    TODO();
+  });
+
+  it('should update calculations relevant to a changed field', function() {
+    TODO();
   });
 });
