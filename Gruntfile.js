@@ -26,7 +26,9 @@ module.exports = function(grunt) {
         cmd: '(! [ -d build ] || rm -rf build) && ' +
             'mkdir -p build && ' +
             'cp -r src/www build/ && ' +
-            'cp -r test/res build/www/',
+            'cp -r test/res build/www/ && ' +
+            'mkdir -p build/www/xsl && ' +
+            'find node_modules -name \*.xsl | xargs -n1 -I{} cp {} build/www/xsl',
       },
     },
 

@@ -1,6 +1,3 @@
-var modelXsl = './xsl/model.xsl';
-var htmlXsl = './xsl/html.xsl';
-
 window.$ = window.jQuery = require('jquery');
 var xslt = require('./xslt');
 require('enketo-core');
@@ -12,7 +9,11 @@ var formSelector = '#form-container';
 
 var location = url.parse(window.location.href);
 var formPath = location.query && location.query.split('&').find(function(param) { return param.indexOf('form=') === 0; });
-formPath = formPath && url.resolve(window.location.href, formPath.split('=', 2)[1]);
+formPath = formPath && absolute(formPath.split('=', 2)[1]);
+
+function absolute(relative) {
+  return url.resolve(window.location.href, relative);
+}
 
 function setStatus(status) {
   console.log('Updating status to: ' + status);
@@ -31,20 +32,31 @@ request(formPath, function(err, res, formXml) {
     return;
   }
 
-  formSelector.append(xslt(formXml, htmlXsl));
+  xslt(formXml, absolute('./xsl/openrosa2html5form.xsl'))
+    .then(function(html) {
+      jQuery(formSelector).append(html);
 
-  var data = {
-    modelStr: xslt(formXml, modelXsl),
-    instanceStr: null,
-    submitted: false,
-    external: [],
-  };
+      return xslt(formXml, absolute('./xsl/openrosa2xmlmodel.xsl'));
+    })
+    .then(function(modelXml) {
 
-  var form = new Form(formSelector, data);
-  var loadErrors = form.init();
+      var data = {
+        modelStr: modelXml,
+        instanceStr: null,
+        submitted: false,
+        external: [],
+      };
 
-  if(loadErrors && loadErrors.length) {
-    setStatus('error: ' + JSON.stringify(loadErrors));
-  } else setStatus('loaded');
+      var form = new Form(formSelector, data);
+      var loadErrors = form.init();
 
+      if(loadErrors && loadErrors.length) {
+        setStatus('error: ' + JSON.stringify(loadErrors));
+      } else setStatus('loaded');
+
+    })
+    .catch(function(err) {
+      console.log('Problem fetching form.', err);
+      setStatus('error: ' + err);
+    });
 });
