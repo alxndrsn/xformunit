@@ -14,6 +14,7 @@ describe('xformunit test framework', function() {
         expect(err.toString()).toBe('Error: error: Error: Invalid XML: Cannot GET /res/missing.xml');
       });
   });
+
   it('should throw an error when the requested form is poorly-formed', function() {
     return xformunit.loadForm('../res/badly-formed.xml')
       .then(function() {
@@ -24,9 +25,10 @@ describe('xformunit test framework', function() {
         // TODO we actually expect an error here, but until we can specify more
         // details that we expect, it's more useful to throw it and fail the
         // test.
-        throw err;
+        expect(err.toString()).toBe('Error: error: Error: Invalid XML: This is deliberately not XML.');
       });
   });
+
   it('should return happily when a form loads successfully', function() {
     return xformunit.loadForm('../res/simple.xml')
       .catch(function(err) {
