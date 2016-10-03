@@ -59,6 +59,29 @@ describe('xformunit test framework', function() {
   });
 
   it('should update calculations relevant to a changed field', function() {
-    TODO();
+    return xformunit.loadForm('../res/reverser.xml')
+      .then(function() {
+
+        return xformunit.get('/data/original');
+      })
+      .then(function(text) {
+        expect(text).toBe('');
+
+        return xformunit.get('/data/reversed');
+      })
+      .then(function(text) {
+        expect(text).toBe('');
+
+        return xformunit.set('/data/original', 'abc123');
+      })
+      .then(function() {
+
+        return xformunit.get('/data/reversed');
+      })
+      .then(function(text) {
+        expect(text).toBe('321cba');
+
+      })
+      .catch(xformunit.unexpected);
   });
 });
