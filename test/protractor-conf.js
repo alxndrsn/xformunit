@@ -3,7 +3,7 @@ exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: ['src/**/*.js'],
   capabilities: {
-    browserName: 'firefox',
+    browserName: process.env.TRAVIS ? 'firefox' : 'chrome',
     loggingPrefs: {
       browser: 'ALL',
       driver: 'ALL',
