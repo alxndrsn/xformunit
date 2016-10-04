@@ -85,7 +85,7 @@ describe('xformunit test framework', function() {
         return xformunit.get('/data/doubled');
       })
       .then(function(text) {
-        expect(text).toBe('abc123abc123');
+        expect(text).toBe('abc123123');
 
       })
       .catch(xformunit.unexpected);
