@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "6"
+addons:
+  firefox: latest-esr
 before_script:
 - ./node_modules/.bin/webdriver-manager update
 - nohup bash -c "./node_modules/.bin/webdriver-manager start 2>&1 &"
