@@ -1,4 +1,4 @@
-var asXml = require('jQuery').parseXML,
+var asXml = require('jquery').parseXML,
     request = require('request'),
     url = require('url');
 
